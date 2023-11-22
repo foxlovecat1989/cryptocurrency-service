@@ -11,7 +11,7 @@ public class FraudCheckService {
 
     private final FraudCheckHistoryRepository fraudCheckHistoryRepository;
 
-    public boolean isFraudulentCustomer(Integer customerId) {
+    public boolean isFraudulentCustomer(Long customerId) {
         fraudCheckHistoryRepository.saveAndFlush(
                 FraudCheckHistory.builder()
                         .customerId(customerId)
