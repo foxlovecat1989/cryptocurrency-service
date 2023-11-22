@@ -11,6 +11,7 @@
   <url>http://www.ed.com</url>
   <modules>
     <module>customer</module>
+      <module>fraud</module>
   </modules>
 
   <properties>
