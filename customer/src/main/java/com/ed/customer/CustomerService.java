@@ -1,5 +1,6 @@
 package com.ed.customer;
 
+import com.ed.amqp.RabbitMQMessageProducer;
 import com.ed.clients.fraud.FraudCheckResponse;
 import com.ed.clients.fraud.FraudClient;
 import com.ed.clients.notification.NotificationClient;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
     private final CustomerRepository customerRepository;
     private final FraudClient fraudClient;
-    private final NotificationClient notificationClient;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     public void registerCustomer(CustomerRegistrationRequest request) {
         FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(request.email());
@@ -33,6 +34,10 @@ public class CustomerService {
                 customer.getEmail(),
                 String.format("Hi %s, welcome to CryptoCurrency Service...", customer.getUsername())
         );
-        notificationClient.sendNotification(notificationRequest);
+        rabbitMQMessageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
+        );
     }
 }
