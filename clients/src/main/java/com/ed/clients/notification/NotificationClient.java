@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(
         name = "notification",
-        url = "http://localhost:8082"
+        url = "${clients.notification.url}"
 )
 public interface NotificationClient {
     @PostMapping("api/v1/notification")
