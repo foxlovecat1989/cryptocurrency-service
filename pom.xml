@@ -7,7 +7,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>cryptocurrency-service</name>
+  <name>microservice-record-am</name>
   <url>http://www.ed.com</url>
   <modules>
     <module>customer</module>
